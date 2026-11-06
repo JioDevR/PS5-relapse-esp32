@@ -1,0 +1,24 @@
+# Directorio de Cabeceras (Include)
+
+Este directorio contiene las definiciones y cabeceras C++ del firmware para el host offline en ESP32:
+
+* **`config.h`**:
+  * Configuración general de red Wi-Fi (SSID, contraseña, canal, máximo de clientes).
+  * Direcciones IP fijas (IP del host, gateway, máscara y rango DHCP).
+  * Configuración de puertos de servicio (DNS en 53, HTTP en 80, HTTPS en 443).
+  * Asignación de pines y parámetros para el LED ARGB / WS2812.
+
+* **`cert.h`**:
+  * Certificado X.509 y clave privada RSA codificados en formato PEM.
+  * Habilita la negociación TLS/HTTPS compatible con el navegador y la Guía del usuario de PS5.
+
+* **`dns.h`**:
+  * Servidor DNS embebido sobre sockets UDP en el puerto 53.
+  * Responde exclusivamente a consultas tipo `A` para `manuals.playstation.net` y `ps5.host`.
+  * Filtra consultas tipo `AAAA` y devuelve `NXDOMAIN` para cualquier otro dominio, bloqueando el tráfico hacia servidores de Sony.
+
+* **`HttpsHandler.h`**:
+  * Inicialización de servidores HTTP y HTTPS concurrentes con `esp_http_server` y `esp_https_server`.
+  * Enrutador y despachador de archivos desde la partición LittleFS.
+  * Detección y entrega transparente de archivos comprimidos con gzip (`.gz`).
+  * Asignación dinámica de buffers de transferencia en PSRAM externa (`ps_malloc`) para preservar la memoria SRAM interna del ESP32.

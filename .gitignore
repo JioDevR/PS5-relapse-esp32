@@ -1,0 +1,18 @@
+# PlatformIO
+.pio/
+data/
+.vscode/
+compile_commands.json
+
+# Caches y herramientas de desarrollo
+.cache/
+*.py[cod]
+__pycache__/
+*.log
+
+# Archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.bak
